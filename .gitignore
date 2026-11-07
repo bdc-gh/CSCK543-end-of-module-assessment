@@ -1,0 +1,17 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+config/local.php
+config/database.local.php
+
+# XAMPP / editor / OS artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Local dependencies, if introduced later
+/vendor/
+/node_modules/
