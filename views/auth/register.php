@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register | Recipe App</title>
+    <link rel="stylesheet" href="../../assets/css/auth.css">
 </head>
-
-<body>
-    <div>
-        <form action="../../backend/auth/register_handler.php" method="post">
-            <label for="name">name:</label><input type="text" id="name" name="name" placeholder="Please enter your name">
-            <label for="email">email:</label><input type="text" id="email" name="email" placeholder="Please enter your email">
-            <label for="password">password:</label><input type="password" id="password" name="password" placeholder="Please enter your password">
-            <label for="password_verify">verify password:</label><input type="password" id="password_verify" name="password_verify" placeholder="Please verify your password">
-            <button>register</button>
-        </form>
-    </div>
+<body class="auth-page auth-register">
+    <main class="auth-layout">
+        <div class="auth-intro">
+            <a class="auth-brand" href="../../index.php" aria-label="Recipe App home">Recipe<span>App</span></a>
+            <p class="auth-eyebrow">Good food starts here</p>
+            <h1>Make room for flavour.</h1>
+            <p>Create an account and start building your own collection of recipes worth sharing.</p>
+            <div class="auth-decoration" aria-hidden="true">✦ &nbsp; fresh ideas for every table &nbsp; ✦</div>
+        </div>
+        <section class="auth-card" aria-labelledby="register-heading">
+            <p class="auth-card-kicker">Join the table</p>
+            <h2 id="register-heading">Create an account</h2>
+            <p class="auth-card-subtitle">A few details and you're ready to explore.</p>
+            <div class="auth-feedback" role="alert" aria-live="polite"></div>
+            <form action="../../backend/auth/register_handler.php" method="post">
+                <div class="auth-field">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required>
+                </div>
+                <div class="auth-field">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div class="auth-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+                </div>
+                <div class="auth-field">
+                    <label for="password_verify">Confirm password</label>
+                    <input type="password" id="password_verify" name="password_verify" placeholder="Enter your password again" autocomplete="new-password" required>
+                </div>
+                <button class="auth-submit" type="submit">Register <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="login.php">Log in</a></p>
+        </section>
+    </main>
 </body>
-
 </html>
