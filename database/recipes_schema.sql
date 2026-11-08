@@ -3,9 +3,9 @@ CREATE TABLE recipes (
     user_id INT NOT NULL,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    category VARCHAR(100) NOT NULL, -- e.g., "Main, Italian, Pasta"
-    ingredients TEXT NOT NULL,      -- List ingredients and quantities
-    steps TEXT NOT NULL,            -- Step-by-step instructions with times
+    category VARCHAR(100) NOT NULL, 
+    ingredients TEXT NOT NULL,      
+    steps TEXT NOT NULL,            
     prep_time_mins INT NOT NULL,
     cook_time_mins INT NOT NULL,
     servings INT NOT NULL,
