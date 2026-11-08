@@ -46,3 +46,23 @@ CREATE TABLE saved_recipes (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE
 );
+
+USE recipe_app;
+
+INSERT INTO users (name, email, password_hash)
+VALUES ('chef', 'chef@example.com', 'hashed_password_string');
+
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+VALUES (
+    1,
+    'Ultimate Spaghetti Bolognese',
+    'A rich, slow-cooked traditional beef bolognese sauce served over spaghetti.',
+    'Main, Italian, Pasta',
+    '1 tbsp olive oil\n500g beef mince\n2 onions, chopped\n2 carrots, chopped\n2x 400g tinned tomatoes\n125ml red wine\n75g parmesan cheese',
+    'Step 1 (10 mins): Heat oil and fry bacon until crisp.\nStep 2 (10 mins): Add onion, carrot, celery and cook until soft.\nStep 3 (5 mins): Add mince and brown.\nStep 4 (75 mins): Add tomatoes, wine, herbs and simmer.\nStep 5 (10 mins): Cook spaghetti and mix into sauce.',
+    20,
+    85,
+    4
+);
+
+select * from recipes;
