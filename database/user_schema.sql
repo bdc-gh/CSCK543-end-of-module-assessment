@@ -1,8 +1,8 @@
-CREATE TABLE `users` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY email_UNIQUE (email),
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
