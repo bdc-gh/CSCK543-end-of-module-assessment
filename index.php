@@ -1,7 +1,7 @@
 <?php
 /**
- * RecipeApp Culinary Journal - Home / Landing Page
- * Connects to MySQL via PDO, fetches all recipes, and renders 
+ * RecipeApp Home / Landing Page
+ * Connects to MySQL fetches all recipes, and renders 
  * the dynamic accessible HTML5 layout using modular header/footer.
  */
 
@@ -20,7 +20,7 @@ try {
 }
 
 // 3. Set dynamic page title & include header
-$page_title = "RecipeApp · Culinary Journal & Recipes";
+$page_title = "RecipeApp · Recipes";
 include __DIR__ . '/includes/header.php';
 ?>
 
@@ -53,7 +53,7 @@ include __DIR__ . '/includes/header.php';
                         </div>
                         <div class="lg:col-span-4 flex items-center justify-between lg:justify-end gap-3 text-secondary font-label-sm text-label-sm tracking-wider uppercase">
                             <span class="text-outline">Catalogued:</span>
-                            <span class="bg-surface-container px-3 py-1.5 rounded font-medium text-primary"><?= count($recipes); ?> Kitchen Monographs</span>
+                            <span class="bg-surface-container px-3 py-1.5 rounded font-medium text-primary"><?= count($recipes); ?> Kitchen Recipes</span>
                         </div>
                     </div>
                 </div>
