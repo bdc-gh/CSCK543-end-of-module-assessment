@@ -1,7 +1,7 @@
 <?php
 /**
- * RecipeApp Home / Landing Page
- * Connects to MySQL fetches all recipes, and renders 
+ * RecipeApp Culinary Journal - Home / Landing Page
+ * Connects to MySQL via PDO, fetches all recipes, and renders 
  * the dynamic accessible HTML5 layout using modular header/footer.
  */
 
@@ -19,118 +19,102 @@ try {
     $error_message = "We couldn't quite reach the pantry ledger at the moment. Please pop back shortly.";
 }
 
-// 3. Set dynamic page title & include header
-$page_title = "RecipeApp · Recipes";
+// 3. Set dynamic page title & include the pure CSS modular header
+$page_title = "RecipeApp · Culinary Journal & Recipes";
 include __DIR__ . '/includes/header.php';
 ?>
 
-    <main class="w-full pt-20 bg-surface min-h-[calc(100vh-14rem)]">
-        <div class="flex flex-col w-full">
-            
-            <!-- Seasonal Ribbon -->
-            <section class="w-full bg-surface-container-low">
-                <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin py-3 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                        <span class="font-label-sm text-label-sm uppercase tracking-[0.22em] text-on-surface-variant">Kitchen Dispatch</span>
-                        <span class="text-outline-variant font-light">/</span>
-                        <span class="font-body-sm text-body-sm text-secondary">Thoughtful home cooking, seasonal flavours &amp; unhurried suppers</span>
-                    </div>
-                    <div class="hidden sm:flex items-center gap-6">
-                        <span class="font-label-sm text-label-sm tracking-[0.15em] text-outline uppercase">London · Cotswolds · Edinburgh</span>
-                        <span class="font-label-sm text-label-sm text-on-surface font-medium">Vol. XIV / Edition 03</span>
-                    </div>
-                </div>
-            </section>
+<!-- Seasonal Dispatch Ribbon -->
+<div class="kitchen-ribbon">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--secondary);"></span>
+        <span style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem;">Kitchen Dispatch</span>
+        <span>/</span>
+        <span style="color: var(--secondary);">Thoughtful home cooking, seasonal flavours &amp; unhurried suppers</span>
+    </div>
+    <div style="display: flex; gap: 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+        <span style="color: var(--outline);">London · Cotswolds · Edinburgh</span>
+        <span style="font-weight: 500;">Vol. XIV / Edition 03</span>
+    </div>
+</div>
 
-            <!-- Search Bar Section -->
-            <section class="w-full px-margin-mobile lg:px-margin py-8 bg-surface-container-low/60">
-                <div class="max-w-[1360px] mx-auto flex flex-col gap-6">
-                    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-                        <div class="lg:col-span-8 relative">
-                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-outline pointer-events-none">search</span>
-                            <input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md font-body-md pl-12 pr-10 py-3.5 rounded shadow-sm outline-none transition-shadow focus:shadow-md" id="recipe-search" placeholder="Search through our recipe archive..." type="search"/>
-                        </div>
-                        <div class="lg:col-span-4 flex items-center justify-between lg:justify-end gap-3 text-secondary font-label-sm text-label-sm tracking-wider uppercase">
-                            <span class="text-outline">Catalogued:</span>
-                            <span class="bg-surface-container px-3 py-1.5 rounded font-medium text-primary"><?= count($recipes); ?> Kitchen Recipes</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Dynamic Recipe Grid -->
-            <section class="w-full px-margin-mobile lg:px-margin py-16">
-                <div class="max-w-[1360px] mx-auto">
-                    <div class="flex flex-col sm:flex-row items-baseline justify-between mb-12">
-                        <div>
-                            <span class="font-label-sm text-label-sm uppercase tracking-[0.24em] text-secondary">THE PANTRY INDEX</span>
-                            <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">Freshly Tested Recipes &amp; Staples</h2>
-                        </div>
-                        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mt-3 sm:mt-0">
-                            Pulled straight from our database tables and prepped for your kitchen counter.
-                        </p>
-                    </div>
-
-                    <?php if (!empty($error_message)): ?>
-                        <div class="p-4 mb-6 bg-error-container text-on-error-container rounded" role="alert">
-                            <?= htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-                        <?php if (!empty($recipes)): ?>
-                            <?php foreach ($recipes as $recipe): ?>
-                                <article class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                                    <div class="relative w-full aspect-[3/2] overflow-hidden bg-surface-container flex items-center justify-center p-6 text-center">
-                                        <div class="absolute inset-0 bg-surface-container flex flex-col items-center justify-center p-4">
-                                            <span class="material-symbols-outlined text-[48px] text-outline mb-2">restaurant_menu</span>
-                                            <span class="font-headline-sm text-headline-sm text-primary"><?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?></span>
-                                        </div>
-                                        <div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-sm px-2.5 py-1 rounded text-primary font-label-sm text-label-sm uppercase tracking-widest z-10">
-                                            <?= htmlspecialchars($recipe['category'], ENT_QUOTES, 'UTF-8'); ?>
-                                        </div>
-                                        <div class="absolute bottom-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-0.5 rounded text-secondary font-label-sm text-label-sm tracking-wide z-10">
-                                            Rec. #<?= str_pad($recipe['recipe_id'], 3, '0', STR_PAD_LEFT); ?>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 flex flex-col flex-1 justify-between gap-6">
-                                        <div class="flex flex-col gap-2.5">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-label-sm text-label-sm uppercase tracking-[0.18em] text-secondary">Recipe Entry</span>
-                                                <span class="font-body-sm text-body-sm text-outline">Serves <?= (int)$recipe['servings']; ?></span>
-                                            </div>
-                                            <h3 class="font-headline-md text-headline-md text-primary group-hover:text-tertiary-container transition-colors leading-tight">
-                                                <?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>
-                                            </h3>
-                                            <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1 leading-relaxed">
-                                                <?= htmlspecialchars($recipe['description'], ENT_QUOTES, 'UTF-8'); ?>
-                                            </p>
-                                        </div>
-                                        <div class="pt-4 bg-surface-container-low px-4 py-3 rounded flex items-center justify-between">
-                                            <div class="flex items-center gap-2 text-secondary">
-                                                <span class="material-symbols-outlined text-[16px]">schedule</span>
-                                                <span class="font-label-sm text-label-sm tracking-wider uppercase">Prep <?= (int)$recipe['prep_time_mins']; ?>m · Cook <?= (int)$recipe['cook_time_mins']; ?>m</span>
-                                            </div>
-                                            <a class="inline-flex items-center gap-1 font-label-sm text-label-sm uppercase tracking-[0.14em] text-primary group-hover:text-tertiary-container transition-colors" href="views/recipes/detail.php?id=<?= (int)$recipe['recipe_id']; ?>">
-                                                <span>View</span>
-                                                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p class="text-on-surface-variant">No recipes found in our pantry ledger yet. Do check back once we've stocked up.</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </section>
-
+<!-- Search Section -->
+<div class="search-section">
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <span class="material-symbols-outlined">search</span>
+            <input type="search" placeholder="Search through our recipe archive..." id="recipe-search"/>
         </div>
-    </main>
+        <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary);">
+            <span style="color: var(--outline);">Catalogued:</span> 
+            <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Monographs</strong>
+        </div>
+    </div>
+</div>
+
+<!-- Main Recipe Grid Container -->
+<main class="recipe-page">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2.5rem;">
+        <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--secondary);">THE PANTRY INDEX</span>
+            <h1 style="font-size: 2rem; font-weight: 700; margin-top: 0.25rem; letter-spacing: -0.02em;">Freshly Tested Recipes &amp; Staples</h1>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--secondary); max-width: 320px;">
+            Pulled straight from our database tables and prepped for your kitchen counter.
+        </p>
+    </div>
+
+    <?php if (!empty($error_message)): ?>
+        <div class="error-notice" role="alert">
+            <?= htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="recipe-grid">
+        <?php if (!empty($recipes)): ?>
+            <?php foreach ($recipes as $recipe): ?>
+                <article class="recipe-card">
+                    <div class="recipe-card-img-placeholder">
+                        <span class="material-symbols-outlined" style="font-size: 48px; color: var(--outline); margin-bottom: 0.5rem;">restaurant_menu</span>
+                        <h2 style="font-size: 1.25rem; font-weight: 600;"><?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                        <div style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(250,249,245,0.9); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                            <?= htmlspecialchars($recipe['category'], ENT_QUOTES, 'UTF-8'); ?>
+                        </div>
+                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.9); padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.75rem; color: var(--secondary);">
+                            Rec. #<?= str_pad($recipe['recipe_id'], 3, '0', STR_PAD_LEFT); ?>
+                        </div>
+                    </div>
+                    <div class="recipe-card-body">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); margin-bottom: 0.5rem;">
+                                <span>Recipe Entry</span>
+                                <span style="color: var(--outline);">Serves <?= (int)$recipe['servings']; ?></span>
+                            </div>
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;"><?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <p style="font-size: 0.875rem; color: var(--secondary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                <?= htmlspecialchars($recipe['description'], ENT_QUOTES, 'UTF-8'); ?>
+                            </p>
+                        </div>
+                        <div class="recipe-meta-bar">
+                            <div style="display: flex; align-items: center; gap: 0.375rem;">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+                                <span>Prep <?= (int)$recipe['prep_time_mins']; ?>m · Cook <?= (int)$recipe['cook_time_mins']; ?>m</span>
+                            </div>
+                            <a href="views/recipes/detail.php?id=<?= (int)$recipe['recipe_id']; ?>" style="text-decoration: none; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 0.25rem;">
+                                <span>View</span>
+                                <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p style="color: var(--secondary);">No recipes found in our pantry ledger yet. Do check back once we've stocked up.</p>
+        <?php endif; ?>
+    </div>
+</main>
 
 <?php 
-// 4. Include modular footer
+// Include pure CSS footer
 include __DIR__ . '/includes/footer.php'; 
 ?>

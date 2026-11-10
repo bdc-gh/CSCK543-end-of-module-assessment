@@ -1,20 +1,15 @@
-<?php
-/**
- * Modular Footer Include
- * Provides consistent bottom-page branding and info.
- */
-?>
-    <!-- Footer Component -->
-    <footer class="w-full bg-surface-container-low mt-space-xl">
-        <div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin py-space-xl flex flex-col md:flex-row items-baseline justify-between gap-space-lg">
-            <div class="flex flex-col gap-space-xs">
-                <div class="flex items-center gap-2">
-                    <span class="font-headline-md text-headline-md text-primary tracking-tight">RecipeApp</span>
-                    <span class="font-label-sm text-label-sm tracking-[0.2em] text-outline uppercase">Studio</span>
+<footer class="site-footer">
+        <div class="footer-container">
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                    <strong style="font-size: 1.125rem;">RecipeApp</strong>
+                    <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--outline);">Studio</span>
                 </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mt-1">Thoughtful home cooking notes, seasonal flavours, and unhurried kitchen craft.</p>
+                <p style="font-size: 0.875rem; color: var(--secondary);">Thoughtful home cooking notes, seasonal flavours, and unhurried kitchen craft.</p>
             </div>
-            <div class="font-label-sm text-label-sm text-outline tracking-wider">&copy; 2026 RECIPE APP KITCHEN JOURNAL. ALL RIGHTS RESERVED.</div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline);">
+                &copy; 2026 RECIPEAPP KITCHEN JOURNAL. ALL RIGHTS RESERVED.
+            </div>
         </div>
     </footer>
 </body>
