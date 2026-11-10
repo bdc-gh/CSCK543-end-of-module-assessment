@@ -38,11 +38,11 @@ include __DIR__ . '/../../includes/header.php';
                 <span class="material-symbols-outlined" style="font-size: 48px; color: var(--outline); margin-bottom: 1rem;">error_outline</span>
                 <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Recipe Unavailable</h1>
                 <p style="color: var(--secondary); margin-bottom: 1.5rem;"><?= htmlspecialchars($error_notice, ENT_QUOTES, 'UTF-8'); ?></p>
-                <a href="index.php" style="display: inline-block; background: var(--primary); color: #ffffff; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Return to Archive</a>
+                <a href="<?= $base_path; ?>views/recipes/index.php" style="display: inline-block; background: var(--primary); color: #ffffff; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Return to Archive</a>
             </div>
         <?php elseif ($recipe): ?>
             <div style="margin-bottom: 1.5rem;">
-                <a href="index.php" style="text-decoration: none; color: var(--secondary); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.375rem;">
+                <a href="<?= $base_path; ?>views/recipes/index.php" style="text-decoration: none; color: var(--secondary); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.375rem;">
                     <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
                     <span>Back to Archive</span>
                 </a>

@@ -34,7 +34,7 @@ include __DIR__ . '/includes/header.php';
     </div>
     <div style="display: flex; gap: 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
         <span style="color: var(--outline);">London · Cotswolds · Edinburgh</span>
-        <span style="font-weight: 500;">Vol. XIV / Edition 03</span>
+        <span style="font-weight: 500;">Vol. 01 / Edition 01</span>
     </div>
 </div>
 
