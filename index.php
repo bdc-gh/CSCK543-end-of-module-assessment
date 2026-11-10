@@ -75,13 +75,17 @@ include __DIR__ . '/includes/header.php';
             <?php foreach ($recipes as $recipe): ?>
                 <article class="recipe-card">
                     <div class="recipe-card-img-placeholder">
-                        <span class="material-symbols-outlined" style="font-size: 48px; color: var(--outline); margin-bottom: 0.5rem;">restaurant_menu</span>
-                        <h2 style="font-size: 1.25rem; font-weight: 600;"><?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
-                        <div style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(250,249,245,0.9); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                        <?php 
+                        $image_filename = !empty($recipe['image_filename']) ? $recipe['image_filename'] : 'placeholder.jpg';
+                        $image_path = $base_path . 'assets/images/recipes/' . htmlspecialchars($image_filename, ENT_QUOTES, 'UTF-8');
+                        ?>
+                        <img src="<?= $image_path; ?>" alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;" />
+                        
+                        <div style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(250,249,245,0.9); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; z-index: 2;">
                             <?= htmlspecialchars($recipe['category'], ENT_QUOTES, 'UTF-8'); ?>
                         </div>
-                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.9); padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.75rem; color: var(--secondary);">
-                            Rec. #<?= str_pad($recipe['recipe_id'], 3, '0', STR_PAD_LEFT); ?>
+                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.9); padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.75rem; color: var(--secondary); z-index: 2;">
+                            Ref. #<?= str_pad($recipe['recipe_id'], 3, '0', STR_PAD_LEFT); ?>
                         </div>
                     </div>
                     <div class="recipe-card-body">

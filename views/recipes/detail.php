@@ -49,15 +49,15 @@ include __DIR__ . '/../../includes/header.php';
             </div>
 
             <article class="recipe-detail-card">
+                <?php 
+                $image_filename = !empty($recipe['image_filename']) ? $recipe['image_filename'] : 'placeholder.jpg';
+                $image_path = $base_path . 'assets/images/recipes/' . htmlspecialchars($image_filename, ENT_QUOTES, 'UTF-8');
+                ?>
+                <div style="width: 100%; height: 320px; border-radius: 10px; overflow: hidden; background-color: var(--surface-low); margin-bottom: 1rem;">
+                    <img src="<?= $image_path; ?>" alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+
                 <div class="recipe-detail-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="background: var(--surface-low); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
-                            <?= htmlspecialchars($recipe['category'], ENT_QUOTES, 'UTF-8'); ?>
-                        </span>
-                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--outline);">
-                            Ref. #<?= str_pad($recipe['recipe_id'], 3, '0', STR_PAD_LEFT); ?>
-                        </span>
-                    </div>
                     
                     <h1 class="recipe-detail-title"><?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                     <p style="font-size: 1.125rem; color: var(--secondary); line-height: 1.6; margin-top: 0.5rem;">
