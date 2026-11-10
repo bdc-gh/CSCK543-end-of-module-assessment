@@ -1,6 +1,6 @@
 <?php
 /**
- * RecipeApp Kitchen Journal - Single Recipe Detail View
+ * RecipeApp Kitchen - Single Recipe Detail View
  * Located at: views/recipes/detail.php
  */
 

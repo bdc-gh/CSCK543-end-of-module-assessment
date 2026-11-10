@@ -16,15 +16,15 @@ try {
     $stmt = $pdo->query("SELECT * FROM recipes ORDER BY created_at DESC");
     $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $error_message = "We couldn't quite reach the pantry ledger at the moment. Please pop back shortly.";
+    $error_message = "We couldn't quite reach the pantry at the moment. Please pop back shortly.";
 }
 
 // 3. Set dynamic page title & include the pure CSS modular header
-$page_title = "RecipeApp · Culinary Journal & Recipes";
+$page_title = "RecipeApp · Recipes";
 include __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Seasonal Dispatch Ribbon -->
+<!-- Seasonal Ribbon -->
 <div class="kitchen-ribbon">
     <div style="display: flex; align-items: center; gap: 0.75rem;">
         <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--secondary);"></span>
@@ -47,7 +47,7 @@ include __DIR__ . '/includes/header.php';
         </div>
         <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary);">
             <span style="color: var(--outline);">Catalogued:</span> 
-            <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Monographs</strong>
+            <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Recipes</strong>
         </div>
     </div>
 </div>
@@ -109,7 +109,7 @@ include __DIR__ . '/includes/header.php';
                 </article>
             <?php endforeach; ?>
         <?php else: ?>
-            <p style="color: var(--secondary);">No recipes found in our pantry ledger yet. Do check back once we've stocked up.</p>
+            <p style="color: var(--secondary);">No recipes found in our pantry. Do check back once we've stocked up.</p>
         <?php endif; ?>
     </div>
 </main>
