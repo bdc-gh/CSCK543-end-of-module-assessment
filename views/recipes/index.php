@@ -4,9 +4,9 @@ require_once dirname(__DIR__, 2) . '/config/database.php';
 
 try {
     // Retrieve recipes from the database
-    $stmt = $pdo->query(
+       $stmt = $pdo->query(
         "SELECT recipe_id, title, description, category,
-                prep_time_mins, cook_time_mins, servings
+                prep_time_mins, cook_time_mins, servings, image_filename
          FROM recipes
          ORDER BY created_at DESC"
     );
@@ -67,46 +67,57 @@ function escapeRecipe($value) {
 
                 <?php foreach ($recipes as $recipe): ?>
 
-                    <article class="recipe-card">
+                   
+<a class="recipe-card-link" href="detail.php?id=<?= (int) $recipe['recipe_id']; ?>">
+    <article class="recipe-card">
+    <?php if (!empty($recipe['image_filename'])): ?>
+    <img
+        src="../../assets/images/recipes/<?= htmlspecialchars($recipe['image_filename'], ENT_QUOTES, 'UTF-8'); ?>"
+        alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>"
+        class="recipe-card-image"
+    >
+<?php endif; ?>
 
-                        <h3>
-                            <?= escapeRecipe($recipe['title']); ?>
-                        </h3>
+        <h3>
+            <?= escapeRecipe($recipe['title']); ?>
+        </h3>
 
-                        <p>
-                            <?= escapeRecipe($recipe['description']); ?>
-                        </p>
+        <p>
+            <?= escapeRecipe($recipe['description']); ?>
+        </p>
 
-                        <p>
-                            <strong>Category:</strong>
-                            <?= escapeRecipe($recipe['category']); ?>
-                        </p>
+        <p>
+            <strong>Category:</strong>
+            <?= escapeRecipe($recipe['category']); ?>
+        </p>
 
-                        <p>
-                            <strong>Preparation:</strong>
-                            <?= escapeRecipe($recipe['prep_time_mins']); ?>
-                            minutes
-                        </p>
+        <p>
+            <strong>Preparation:</strong>
+            <?= escapeRecipe($recipe['prep_time_mins']); ?>
+            minutes
+        </p>
 
-                        <p>
-                            <strong>Cooking:</strong>
-                            <?= escapeRecipe($recipe['cook_time_mins']); ?>
-                            minutes
-                        </p>
+        <p>
+            <strong>Cooking:</strong>
+            <?= escapeRecipe($recipe['cook_time_mins']); ?>
+            minutes
+        </p>
 
-                        <p>
-                            <strong>Total time:</strong>
-                            <?= (int) $recipe['prep_time_mins']
-                                + (int) $recipe['cook_time_mins']; ?>
-                            minutes
-                        </p>
+        <p>
+            <strong>Total time:</strong>
+            <?= (int) $recipe['prep_time_mins']
+                + (int) $recipe['cook_time_mins']; ?>
+            minutes
+        </p>
 
-                        <p>
-                            <strong>Servings:</strong>
-                            <?= escapeRecipe($recipe['servings']); ?>
-                        </p>
+        <p>
+            <strong>Servings:</strong>
+            <?= escapeRecipe($recipe['servings']); ?>
+        </p>
 
-                    </article>
+    </article>
+</a>
+
 
                 <?php endforeach; ?>
 
