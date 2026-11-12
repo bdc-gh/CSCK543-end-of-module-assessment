@@ -37,5 +37,5 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 $stmt = $pdo->prepare('INSERT INTO users(name,email,password_hash) VALUES (?,?,?)');
 $stmt->execute([$name, $email, $hash]);
 
-header('location:/CSCK543-end-of-module-assessment/views/auth/login.php');
+header('location:../../views/auth/login.php');
 exit;

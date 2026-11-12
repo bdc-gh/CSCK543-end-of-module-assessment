@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('location:/CSCK543-end-of-module-assessment/views/auth/login.php');
+    header('location:../auth/login.php');
     exit;
 }
 
