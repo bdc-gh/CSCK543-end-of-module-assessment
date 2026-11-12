@@ -1,7 +1,7 @@
 <?php
 /**
  * RecipeApp Culinary Journal - Home / Landing Page
- * Connects to MySQL via PDO, fetches all recipes, and renders 
+ * Connects to MySQL via PDO, fetches all recipes, and renders
  * the dynamic accessible HTML5 layout using modular header/footer.
  */
 
@@ -43,10 +43,20 @@ include __DIR__ . '/includes/header.php';
     <div class="search-container">
         <div class="search-input-wrapper">
             <span class="material-symbols-outlined">search</span>
-            <input type="search" placeholder="Search through our recipe archive..." id="recipe-search"/>
+           <form action="views/recipes/index.php" method="GET" class="search-form">
+    <input
+        type="search"
+        placeholder="Search through our recipe archive..."
+        id="recipe-search"
+        name="search"
+    />
+    <button type="submit" aria-label="Search recipes">
+        Search
+    </button>
+</form>
         </div>
         <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary);">
-            <span style="color: var(--outline);">Catalogued:</span> 
+            <span style="color: var(--outline);">Catalogued:</span>
             <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Recipes</strong>
         </div>
     </div>
@@ -110,7 +120,7 @@ include __DIR__ . '/includes/header.php';
     </div>
 </main>
 
-<?php 
+<?php
 // Include pure CSS footer
-include __DIR__ . '/includes/footer.php'; 
+include __DIR__ . '/includes/footer.php';
 ?>

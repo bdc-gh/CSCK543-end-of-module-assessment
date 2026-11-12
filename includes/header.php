@@ -65,6 +65,7 @@ if ($isLogin) {
                         <summary class="account-menu-trigger"><span class="account-menu-avatar material-symbols-outlined" aria-hidden="true">person</span><span class="account-menu-name"><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></span><span class="account-menu-chevron" aria-hidden="true"></span></summary>
                         <div class="account-menu-panel">
                             <a class="account-menu-link" href="<?= $base_path; ?>views/account/index.php">My account</a>
+                            <a class="account-menu-link" href="<?= $base_path; ?>views/recipes/favourites.php">My Favourites</a>
                             <form action="<?= $base_path; ?>backend/auth/loginout.php" method="post">
                                 <button type="submit" class="account-menu-logout">Log out</button>
                             </form>

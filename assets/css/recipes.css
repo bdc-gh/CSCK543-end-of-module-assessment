@@ -406,3 +406,30 @@ input:focus-visible {
         height: 190px;
     }
 }
+/* Favourite buttons */
+.favourite-form {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.favourite-button {
+    background-color: #A5A99A;
+    color: #30332F;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.favourite-button:hover {
+    background-color: #B99587;
+}
+
+.favourite-button:focus-visible {
+    outline: 3px solid #30332F;
+    outline-offset: 3px;
+}
