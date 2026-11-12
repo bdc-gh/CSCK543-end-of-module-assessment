@@ -128,18 +128,18 @@ VALUES (
     'healthy_pizza.jpg'
 );
 
--- 6. Dried Fruit Energy Nuggets
+-- 6. Couscous Salad
 INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
-    'Dried Fruit Energy Nuggets',
-    'Quick no-bake energy snacks made from sweet dried fruits, coconut oil, and sesame seeds.',
-    'Snack, Vegan, Healthy',
-    '50g soft dried apricots\n100g soft dried dates\n50g dried cherries\n2 tsp coconut oil\n1 tbsp toasted sesame seeds',
-    'Step 1: Put apricots, dates, and cherries into a food processor and whizz until very finely chopped.\nStep 2: Tip into a bowl and use your hands to work in the coconut oil.\nStep 3: Shape the mix into walnut-sized balls.\nStep 4: Roll the balls in toasted sesame seeds and store in an airtight container.',
-    10,
-    0,
-    6,
+    'Couscous Salad',
+    'A light, refreshing Mediterranean-style couscous salad packed with fresh herbs, crisp vegetables, and a zesty dressing.',
+    'Salad, Vegetarian, Main',
+    '200g couscous\n200ml vegetable stock\n1 cucumber, diced\n200g cherry tomatoes, halved\n1 red onion, finely chopped\nHandfresh parsley and mint\n3 tbsp extra virgin olive oil\n1 lemon, juiced',
+    'Step 1: Place the couscous in a large bowl, pour over the boiling vegetable stock, cover, and leave to absorb for 5 minutes.\nStep 2: Fluff the couscous with a fork and allow it to cool slightly.\nStep 3: Stir in the diced cucumber, halved cherry tomatoes, red onion, and chopped fresh herbs.\nStep 4: Whisk together the olive oil and lemon juice, pour over the salad, toss well to combine, and serve.',
+    15,
+    5,
+    4,
     'couscous_salad.jpg'
 );
 
