@@ -27,7 +27,7 @@ $stmt->execute([$email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user) {
-    echo 'this email has been registered.';
+    header('location:../../views/auth/register.php?error=email_exists');
     exit;
 }
 
