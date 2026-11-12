@@ -26,5 +26,5 @@ if (!password_verify($password, $user['password_hash'])) {
 
 $_SESSION['user_id'] = $user['user_id'];
 
-header('location:/CSCK543-end-of-module-assessment/index.php');
+header('location:../../index.php');
 exit;

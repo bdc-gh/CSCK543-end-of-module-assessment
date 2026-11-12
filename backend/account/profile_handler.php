@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /CSCK543-end-of-module-assessment/views/auth/login.php');
+    header('Location: ../../views/auth/login.php');
     exit;
 }
 require __DIR__ . '/../../config/database.php';
@@ -14,5 +14,5 @@ if ($name === '') {
 }
 $stmt = $pdo->prepare('UPDATE users SET name = ? WHERE user_id = ?');
 $stmt->execute([$name, $_SESSION['user_id']]);
-header('Location: /CSCK543-end-of-module-assessment/views/account/index.php');
+header('Location: ../../views/account/index.php');
 exit;

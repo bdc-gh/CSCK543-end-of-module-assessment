@@ -24,6 +24,7 @@ CREATE TABLE recipes (
     cook_time_mins INT NOT NULL,
     servings INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_filename VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
@@ -53,7 +54,7 @@ INSERT INTO users (name, email, password_hash)
 VALUES ('chef', 'chef@example.com', 'hashed_password_string');
 
 -- 1. Ultimate Spaghetti Bolognese
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Ultimate Spaghetti Bolognese',
@@ -63,11 +64,12 @@ VALUES (
     'Step 1 (10 mins): Heat oil and fry bacon until crisp.\nStep 2 (10 mins): Add onion, carrot, celery and cook until soft.\nStep 3 (5 mins): Add mince and brown.\nStep 4 (75 mins): Add tomatoes, wine, herbs and simmer.\nStep 5 (10 mins): Cook spaghetti and mix into sauce.',
     20,
     85,
-    4
+    4,
+    'spaghetti_bolognese.jpg'
 );
 
 -- 2. Vegan American Pancakes
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Vegan American Pancakes',
@@ -77,11 +79,12 @@ VALUES (
     'Step 1: Put flour and baking powder in a bowl and stir together. Mix milk, maple syrup, vanilla, and coconut oil.\nStep 2: Gradually stir wet ingredients into dry until you have a smooth batter. Let sit for 3 minutes.\nStep 3: Heat a non-stick frying pan with coconut oil over medium heat.\nStep 4: Pour batter to form 10cm pancakes. Cook until bubbles form, then flip and cook for 2-3 minutes.\nStep 5: Serve warm drizzled with maple syrup.',
     10,
     15,
-    4
+    4,
+    'vegan_pancakes.jpg'
 );
 
 -- 3. Easy Lamb Biryani
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Easy Lamb Biryani',
@@ -91,11 +94,12 @@ VALUES (
     'Step 1: Heat oil in a large pan and fry onions until golden brown.\nStep 2: Add garlic and lamb, sealing the meat on all sides.\nStep 3: Stir in biryani paste and cook for 2 minutes.\nStep 4: Pour in lamb stock, bring to a boil, then simmer until the lamb is tender.\nStep 5: Layer with cooked basmati rice and steam until hot through.',
     20,
     45,
-    4
+    4,
+    'lamb_biryani.jpg'
 );
 
 -- 4. Mushroom Doner Kebab
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Mushroom Doner Kebab',
@@ -105,11 +109,12 @@ VALUES (
     'Step 1: Tear oyster mushrooms into strips resembling kebab meat.\nStep 2: Toss mushrooms in olive oil, paprika, cumin, garlic powder, salt, and pepper.\nStep 3: Roast or pan-fry on high heat until dark, crispy, and reduced.\nStep 4: Serve warm wrapped in flatbreads with fresh salad and garlic sauce.',
     15,
     20,
-    2
+    2,
+    'mushroom_doner.jpg'
 );
 
 -- 5. Healthy Pizza
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Healthy Pizza',
@@ -119,11 +124,12 @@ VALUES (
     'Step 1: Heat the oven to 200C/180C fan.\nStep 2: Mix flour, baking powder, and salt in a bowl. Stir in oil and water until a soft dough forms.\nStep 3: Knead on a floured surface for 3-4 minutes, then roll out into thin pizza bases.\nStep 4: Spread passata, add mozzarella and vegetables.\nStep 5: Bake on a baking sheet for 15 minutes until crisp.',
     15,
     15,
-    2
+    2,
+    'healthy_pizza.jpg'
 );
 
 -- 6. Dried Fruit Energy Nuggets
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Dried Fruit Energy Nuggets',
@@ -133,11 +139,12 @@ VALUES (
     'Step 1: Put apricots, dates, and cherries into a food processor and whizz until very finely chopped.\nStep 2: Tip into a bowl and use your hands to work in the coconut oil.\nStep 3: Shape the mix into walnut-sized balls.\nStep 4: Roll the balls in toasted sesame seeds and store in an airtight container.',
     10,
     0,
-    6
+    6,
+    'couscous_salad.jpg'
 );
 
 -- 7. Plum Clafoutis
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Plum Clafoutis',
@@ -147,11 +154,12 @@ VALUES (
     'Step 1: Heat oven to 180C and grease a round baking dish with butter.\nStep 2: Whisk cornflour, ground almonds, and a pinch of salt together.\nStep 3: In a separate large bowl, beat eggs and caster sugar until pale, then mix in the almond blend, creme fraiche, and milk.\nStep 4: Pour batter into the dish and arrange plums cut-side up on top.\nStep 5: Bake for 45 minutes until golden and just set.',
     20,
     45,
-    6
+    6,
+    'plum_clafoutis.jpg'
 );
 
 -- 8. Mango Pie
-INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings) 
+INSERT INTO recipes (user_id, title, description, category, ingredients, steps, prep_time_mins, cook_time_mins, servings, image_filename) 
 VALUES (
     1,
     'Mango Pie',
@@ -161,7 +169,8 @@ VALUES (
     'Step 1: Preheat oven to 190C.\nStep 2: Toss sliced mangoes with sugar, lemon juice, cornflour, and vanilla extract.\nStep 3: Spoon the mango filling evenly into the pre-baked pastry case.\nStep 4: Bake for 25-30 minutes until the filling is bubbling and thickened.\nStep 5: Allow to cool completely before slicing and serving.',
     20,
     30,
-    8
+    8,
+    'mango_pie.jpg'
 );
 
 select * from recipes;

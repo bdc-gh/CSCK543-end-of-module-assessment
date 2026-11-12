@@ -224,6 +224,91 @@ body.auth-page {
     text-underline-offset: .2em;
 }
 
+/* register --email exists dialog */
+#emailErrorDialog {
+    margin: auto;
+    width: min(92vw, 420px);
+    max-width: none;
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    overflow: auto;
+    border: 0;
+    border-radius: .55rem;
+    background: #fff;
+    color: #292e29;
+    box-shadow: 0 18px 45px rgba(42, 39, 31, .24);
+}
+
+#emailErrorDialog::backdrop {
+    background: rgba(24, 29, 22, .55);
+}
+
+.auth-dialog-content {
+    padding: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+#emailErrorDialog h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    font-weight: 400;
+    letter-spacing: -.04em;
+    line-height: 1.15;
+}
+
+#emailErrorDescription {
+    margin: .85rem 0 1.8rem;
+    color: #5d655d;
+    line-height: 1.6;
+}
+
+.auth-dialog-actions {
+    display: grid;
+    gap: .9rem;
+}
+
+.auth-dialog-actions form { margin: 0; }
+
+.auth-dialog-primary,
+.auth-dialog-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    min-height: 3.35rem;
+    padding: .7rem 1rem;
+    border-radius: .25rem;
+    font: inherit;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-dialog-primary {
+    border: 1px solid #292e29;
+    background: #292e29;
+    color: #fff;
+}
+
+.auth-dialog-primary:hover { background: #465547; }
+
+.auth-dialog-secondary {
+    border: 1px solid #e3e1da;
+    background: transparent;
+    color: #292e29;
+}
+
+.auth-dialog-secondary:hover { background: #f4f3ef; }
+
+.auth-dialog-primary:focus-visible,
+.auth-dialog-secondary:focus-visible {
+    outline: 3px solid #6c8168;
+    outline-offset: 2px;
+}
+
 @media (max-width: 760px) {
     body.auth-page {
         display: block;
