@@ -1,11 +1,17 @@
+<?php
+$error = $_GET['error'] ?? '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in | Recipe App</title>
     <link rel="stylesheet" href="../../assets/css/auth.css">
 </head>
+
 <body class="auth-page auth-login">
     <main class="auth-layout">
         <div class="auth-intro">
@@ -19,7 +25,11 @@
             <p class="auth-card-kicker">Your recipe collection</p>
             <h2 id="login-heading">Log in</h2>
             <p class="auth-card-subtitle">Enter your details to continue.</p>
-            <div class="auth-feedback" role="alert" aria-live="polite"></div>
+            <?php if ($error === 'invalid_credentials'): ?>
+                <div class="auth-feedback" role="alert" aria-live="polite">
+                    Invalid email or password.
+                </div>
+            <?php endif; ?>
             <form action="../../backend/auth/login_handler.php" method="post">
                 <div class="auth-field">
                     <label for="email">Email address</label>
@@ -35,4 +45,5 @@
         </section>
     </main>
 </body>
+
 </html>
