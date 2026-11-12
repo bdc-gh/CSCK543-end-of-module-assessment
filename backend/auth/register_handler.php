@@ -1,23 +1,22 @@
 <?php
-$name = $_POST['name'] ?? '';
-$email = $_POST['email'] ?? '';
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 $password_verify = $_POST['password_verify'] ?? '';
-
-if ($name == '') {
-    echo 'Name should not be null.';
-    exit;
-}
-if ($email == '') {
-    echo 'Email should not be null.';
-    exit;
-}
-if ($password == '') {
-    echo 'Password should not be null.';
-    exit;
-}
-if ($password !== $password_verify) {
-    echo 'Passwords do not match.';
+session_start();
+// Keep these fields for one return to the form; never store passwords here.
+$_SESSION['register_old'] = [
+    'name' => $name,
+    'email' => $email,
+];
+// Validate on the server even if the browser checks the form, because requests can bypass the registration page.
+if (
+    trim($name) === '' ||
+    trim($email) === '' ||
+    $password === '' ||
+    $password !== $password_verify || filter_var($email, FILTER_VALIDATE_EMAIL) === false
+) {
+    header('Location: ../../views/auth/register.php?error=invalid_input');
     exit;
 }
 require __DIR__ . '/../../config/database.php';
@@ -36,6 +35,7 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $pdo->prepare('INSERT INTO users(name,email,password_hash) VALUES (?,?,?)');
 $stmt->execute([$name, $email, $hash]);
-
+// Registration succeeded, so the saved form values are no longer needed.
+unset($_SESSION['register_old']);
 header('location:../../views/auth/login.php');
 exit;
