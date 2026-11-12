@@ -215,6 +215,27 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     transition: box-shadow 0.2s ease;
 }
+/* Make the entire recipe card clickable */
+.recipe-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.recipe-card-link:hover .recipe-card {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.recipe-card-link:focus-visible {
+    outline: 3px solid var(--accent, #B99587);
+    outline-offset: 4px;
+}
+
+.recipe-card-link h3 {
+    color: var(--text-primary, #30332F);
+}
+
 
 .recipe-card:hover {
     box-shadow: 0 6px 16px rgba(0,0,0,0.06);
@@ -369,4 +390,46 @@ input:focus-visible {
         flex-direction: column;
         gap: 1.5rem;
     }
+}
+/* Recipe card images */
+.recipe-card-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px 8px 0 0;
+}
+
+@media (max-width: 600px) {
+    .recipe-card-image {
+        height: 190px;
+    }
+}
+/* Favourite buttons */
+.favourite-form {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.favourite-button {
+    background-color: #A5A99A;
+    color: #30332F;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.favourite-button:hover {
+    background-color: #B99587;
+}
+
+.favourite-button:focus-visible {
+    outline: 3px solid #30332F;
+    outline-offset: 3px;
 }
