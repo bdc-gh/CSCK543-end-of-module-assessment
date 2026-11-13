@@ -52,7 +52,7 @@ include __DIR__ . '/../../includes/header.php';
 
                 <?php foreach ($recipes as $recipe): ?>
 
-                    <div class="recipe-card">
+                    <div class="recipe-card favourite-recipe-card">
 
                         <?php if (!empty($recipe['image_filename'])): ?>
                             <img

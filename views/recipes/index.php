@@ -127,69 +127,68 @@ function escapeRecipe($value) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Browse Recipes</title>
-
-    <link rel="stylesheet" href="../../assets/css/recipes.css">
-</head>
-
-<body>
+<?php
+$page_title = "Browse Recipes · RecipeApp";
+include __DIR__ . '/../../includes/header.php';
+?>
 
 <main class="recipe-page">
 
-    <header>
-        <h1>Discover Recipes</h1>
-        <p>Explore delicious recipes and find your next favourite meal.</p>
-    </header>
-<p class="return-home-link">
-    <a href="../../index.php">← Return Home</a>
-</p>
+   <div class="archive-intro">
+    <h1>Discover Recipes</h1>
+    <p>Explore delicious recipes and find your next favourite meal.</p>
+</div>
     <section aria-labelledby="recipe-heading">
 
         <h2 id="recipe-heading">All Recipes</h2>
         <form method="GET" action="index.php" class="recipe-filter-form">
-            <label for="min_rating">Minimum rating</label>
-            <label for="sort">Sort recipes</label>
+           <div class="filter-field">
+    <label for="sort">Sort recipes</label>
+    <select name="sort" id="sort">
+        <option value="newest" <?= $sort === 'newest' ? 'selected' : ''; ?>>Newest first</option>
+        <option value="highest_rated" <?= $sort === 'highest_rated' ? 'selected' : ''; ?>>Highest rated</option>
+        <option value="quickest" <?= $sort === 'quickest' ? 'selected' : ''; ?>>Quickest first</option>
+        <option value="alphabetical" <?= $sort === 'alphabetical' ? 'selected' : ''; ?>>Alphabetical (A–Z)</option>
+    </select>
+</div>
 
-<select name="sort" id="sort">
-    <option value="newest" <?= $sort === 'newest' ? 'selected' : ''; ?>>Newest first</option>
-    <option value="highest_rated" <?= $sort === 'highest_rated' ? 'selected' : ''; ?>>Highest rated</option>
-    <option value="quickest" <?= $sort === 'quickest' ? 'selected' : ''; ?>>Quickest first</option>
-    <option value="alphabetical" <?= $sort === 'alphabetical' ? 'selected' : ''; ?>>Alphabetical (A–Z)</option>
-</select>
+<div class="filter-field">
+    <label for="min_rating">Minimum rating</label>
+    <select name="min_rating" id="min_rating">
+        <option value="">Any rating</option>
+        <option value="3" <?= $minRating == 3 ? 'selected' : ''; ?>>3 stars or above</option>
+        <option value="4" <?= $minRating == 4 ? 'selected' : ''; ?>>4 stars or above</option>
+        <option value="5" <?= $minRating == 5 ? 'selected' : ''; ?>>5 stars only</option>
+    </select>
+</div>
 
-<select name="min_rating" id="min_rating">
-    <option value="">Any rating</option>
-    <option value="3" <?= $minRating == 3 ? 'selected' : ''; ?>>3 stars or above</option>
-    <option value="4" <?= $minRating == 4 ? 'selected' : ''; ?>>4 stars or above</option>
-    <option value="5" <?= $minRating == 5 ? 'selected' : ''; ?>>5 stars only</option>
-</select>
-<label for="max_time">Maximum cooking time</label>
+<div class="filter-field">
+    <label for="max_time">Maximum cooking time</label>
+    <select name="max_time" id="max_time">
+        <option value="">Any time</option>
+        <option value="15" <?= $maxTime == 15 ? 'selected' : ''; ?>>15 minutes</option>
+        <option value="30" <?= $maxTime == 30 ? 'selected' : ''; ?>>30 minutes</option>
+        <option value="45" <?= $maxTime == 45 ? 'selected' : ''; ?>>45 minutes</option>
+        <option value="60" <?= $maxTime == 60 ? 'selected' : ''; ?>>60 minutes</option>
+    </select>
+</div>
 
-<select name="max_time" id="max_time">
-    <option value="">Any time</option>
-    <option value="15" <?= $maxTime == 15 ? 'selected' : ''; ?>>15 minutes</option>
-    <option value="30" <?= $maxTime == 30 ? 'selected' : ''; ?>>30 minutes</option>
-    <option value="45" <?= $maxTime == 45 ? 'selected' : ''; ?>>45 minutes</option>
-    <option value="60" <?= $maxTime == 60 ? 'selected' : ''; ?>>60 minutes</option>
-</select>
-    <?php if ($search !== ''): ?>
-        <input type="hidden" name="search" value="<?= escapeRecipe($search); ?>">
-    <?php endif; ?>
-
+<div class="filter-field">
     <label for="dietary">Dietary preference</label>
-
     <select name="dietary" id="dietary">
         <option value="">All recipes</option>
         <option value="vegan" <?= $dietary === 'vegan' ? 'selected' : ''; ?>>Vegan</option>
         <option value="vegetarian" <?= $dietary === 'vegetarian' ? 'selected' : ''; ?>>Vegetarian</option>
         <option value="meat" <?= $dietary === 'meat' ? 'selected' : ''; ?>>Meat</option>
     </select>
+</div>
+
+<?php if ($search !== ''): ?>
+    <input type="hidden" name="search" value="<?= escapeRecipe($search); ?>">
+<?php endif; ?>
+
+
+
 
     <button type="submit">Apply filter</button>
 
@@ -210,7 +209,7 @@ function escapeRecipe($value) {
             <div class="recipe-grid">
 
                 <?php foreach ($recipes as $recipe): ?>
-
+<div class="recipe-card-item">
                    
 <a class="recipe-card-link" href="detail.php?id=<?= (int) $recipe['recipe_id']; ?>">
     <article class="recipe-card">
@@ -288,7 +287,7 @@ function escapeRecipe($value) {
             : 'Save to favourites'; ?>
     </button>
 </form>
-
+</div>
 
                 <?php endforeach; ?>
 
