@@ -58,13 +58,16 @@ require __DIR__ . '/../../includes/header.php';
         </div>
     </main>
 
-    <dialog class="edit-dialog" id="editDialog" aria-labelledby="editTitle">
+    <dialog class="edit-dialog" id="editDialog" aria-labelledby="editTitle"<?= ($_GET['error'] ?? '') === 'invalid_name' ? ' data-open-on-load' : '' ?>>
         <div class="dialog-heading">
             <p class="section-number">Update your details</p>
             <h2 id="editTitle">Edit your name</h2>
             <p>This is the name shown on your account.</p>
         </div>
         <form action="../../backend/account/profile_handler.php" method="post">
+            <?php if (($_GET['error'] ?? '') === 'invalid_name'): ?>
+                <p class="edit-error" role="alert">Please enter a name.</p>
+            <?php endif; ?>
             <label for="newName">Name</label>
             <input id="newName" name="name" type="text" value="<?= htmlspecialchars($user['name'], ENT_QUOTES, 'utf-8') ?>" autocomplete="name" required>
             <div class="dialog-actions">

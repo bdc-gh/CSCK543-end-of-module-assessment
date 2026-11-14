@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 require __DIR__ . '/../../config/database.php';
 $name = trim($_POST['name'] ?? '');
 if ($name === '') {
-    echo 'Name cannot be empty.';
+    header('Location: ../../views/account/index.php?error=invalid_name');
     exit;
 }
 $stmt = $pdo->prepare('UPDATE users SET name = ? WHERE user_id = ?');
