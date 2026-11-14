@@ -8,12 +8,18 @@
 // 1. Connect to the MySQL database
 require_once __DIR__ . '/config/database.php';
 
-// 2. Fetch recipes securely using PDO
+// 2. Fetch recipes securely using PDO (with simple search filtering support)
 $recipes = [];
 $error_message = '';
+$search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM recipes ORDER BY created_at DESC");
+    if (!empty($search_query)) {
+        $stmt = $pdo->prepare("SELECT * FROM recipes WHERE title LIKE :query OR category LIKE :query ORDER BY created_at DESC");
+        $stmt->execute(['query' => '%' . $search_query . '%']);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM recipes ORDER BY created_at DESC");
+    }
     $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error_message = "We couldn't quite reach the pantry at the moment. Please pop back shortly.";
@@ -34,18 +40,30 @@ include __DIR__ . '/includes/header.php';
     </div>
     <div style="display: flex; gap: 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
         <span style="color: var(--outline);">London · Cotswolds · Edinburgh</span>
-        <span style="font-weight: 500;">Vol. 01 / Edition 01</span>
+        <span style="font-weight: 500;">Vol. XIV / Edition 03</span>
     </div>
 </div>
 
 <!-- Search Section -->
 <div class="search-section">
     <div class="search-container">
-        <div class="search-input-wrapper">
+        <div class="search-input-wrapper" style="display: flex; align-items: center; width: 100%;">
             <span class="material-symbols-outlined">search</span>
-            <input type="search" placeholder="Search through our recipe archive..." id="recipe-search"/>
+            <form action="index.php" method="GET" style="display: flex; width: 100%; gap: 0.5rem; align-items: center;">
+                <input
+                    type="search"
+                    placeholder="Search through our recipe archive..."
+                    id="recipe-search"
+                    name="search"
+                    value="<?= htmlspecialchars($search_query, ENT_QUOTES, 'UTF-8'); ?>"
+                    style="border: none; background: transparent; width: 100%; outline: none;"
+                />
+                <button type="submit" style="background: var(--primary); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;">
+                    Search
+                </button>
+            </form>
         </div>
-        <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary);">
+        <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); white-space: nowrap;">
             <span style="color: var(--outline);">Catalogued:</span> 
             <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Recipes</strong>
         </div>
