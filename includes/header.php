@@ -21,8 +21,8 @@ $name = '';
 if ($isLogin) {
     $stmt = $pdo->prepare('SELECT name FROM users WHERE user_id = ?');
     $stmt->execute([$_SESSION['user_id']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    $name = $user['name'] ?? '';
+    $headerUser = $stmt->fetch(PDO::FETCH_ASSOC);
+    $name = $headerUser['name'] ?? '';
 }
 
 ?>
@@ -43,9 +43,12 @@ if ($isLogin) {
     <!-- Pure Local Stylesheet -->
     <link rel="stylesheet" href="<?= $base_path; ?>assets/css/recipes.css">
     <link rel="stylesheet" href="<?= $base_path; ?>assets/css/account-menu.css">
+    <?php if (!empty($page_stylesheet)): ?>
+        <link rel="stylesheet" href="<?= $base_path . htmlspecialchars($page_stylesheet, ENT_QUOTES, 'UTF-8'); ?>">
+    <?php endif; ?>
 </head>
 
-<body>
+<body<?= !empty($body_class) ? ' class="' . htmlspecialchars($body_class, ENT_QUOTES, 'UTF-8') . '"' : '' ?>>
 
     <header class="site-header">
         <div class="header-container">
@@ -55,8 +58,8 @@ if ($isLogin) {
             </a>
             <nav>
                 <ul class="nav-links">
+                    <li><a href="<?= $base_path; ?>index.php">Home</a></li>
                     <li><a href="<?= $base_path; ?>views/recipes/index.php">Recipe Archive</a></li>
-                    <li><a href="<?= $base_path; ?>index.php">Return Home</a></li>
                 </ul>
             </nav>
             <div class="auth-actions">
@@ -68,7 +71,9 @@ if ($isLogin) {
                                         <span class="account-menu-chevron" aria-hidden="true"></span>
                                     </summary>
                                     <div class="account-menu-panel">
-                                        <a class="account-menu-link" href="<?= $base_path; ?>views/account/index.php">My account</a>
+                                        <?php if (($header_context ?? '') !== 'account'): ?>
+                                            <a class="account-menu-link" href="<?= $base_path; ?>views/account/index.php">My account</a>
+                                        <?php endif; ?>
                                         <a class="account-menu-link" href="<?= $base_path; ?>views/recipes/favourites.php">My Favourites</a>
                                         <form action="<?= $base_path; ?>backend/auth/loginout.php" method="post">
                                             <button type="submit" class="account-menu-logout">Log out</button>

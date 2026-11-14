@@ -56,7 +56,7 @@ body.account-page {
 
 .account-main {
     max-width: 1340px;
-    margin: 0 auto;
+    margin: 80px auto 0;
     padding: clamp(2.5rem, 7vw, 6rem) clamp(1.25rem, 5vw, 3rem) 4rem;
 }
 
@@ -177,10 +177,25 @@ body.account-page {
     font-size: 1.7rem;
 }
 
-.favourites-panel>p:last-child {
-    max-width: 20rem;
-    color: #656a61;
-    line-height: 1.6;
+.favourites-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .65rem;
+    margin-left: -.65rem;
+    border-radius: .25rem;
+    color: #30332f;
+    font-size: .86rem;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.favourites-link:link,
+.favourites-link:visited { color: #30332f; text-decoration: none; }
+.favourites-link:hover,
+.favourites-link:visited:hover {
+    background: #e0e5d8;
+    color: #344d31;
 }
 
 .account-footer {
@@ -296,6 +311,7 @@ body.account-page {
 }
 
 @media (max-width: 760px) {
+    .account-main { margin-top: 116px; }
     .account-header nav {
         gap: 1rem;
     }

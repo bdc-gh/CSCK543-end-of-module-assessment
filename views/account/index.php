@@ -10,27 +10,12 @@ require __DIR__ . '/../../config/database.php';
 $stmt = $pdo->prepare('SELECT * FROM users WHERE user_id = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+$page_title = 'My account | RecipeApp';
+$page_stylesheet = 'assets/css/account.css';
+$body_class = 'account-page';
+$header_context = 'account';
+require __DIR__ . '/../../includes/header.php';
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My account | Recipe App</title>
-    <link rel="stylesheet" href="../../assets/css/account.css">
-</head>
-
-<body class="account-page">
-    <header class="account-header">
-        <a class="account-brand" href="../../index.php">Recipe <span>App</span></a>
-        <nav aria-label="Account navigation">
-            <a href="../../index.php">Home</a>
-            <span aria-current="page">My account</span>
-        </nav>
-    </header>
 
     <main class="account-main">
         <div class="account-heading">
@@ -64,15 +49,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <p class="section-number">02 / Recipe collection</p>
                 <h2 id="favourites-heading">Saved recipes</h2>
                 <div class="favourites-placeholder" aria-hidden="true">✳</div>
-                <p>view all →</p>
+                <a class="favourites-link" href="../recipes/favourites.php">View saved recipes <span aria-hidden="true">↗</span></a>
             </section>
         </div>
 
         <div class="account-footer">
             <p>Good cooking begins with a little curiosity.</p>
-            <form action="../../backend/auth/loginout.php" method="post">
-                <button class="logout-button" type="submit">Log out <span aria-hidden="true">→</span></button>
-            </form>
         </div>
     </main>
 
