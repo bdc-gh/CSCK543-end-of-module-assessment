@@ -25,7 +25,32 @@ try {
     $error_message = "We couldn't quite reach the pantry at the moment. Please pop back shortly.";
 }
 
-// 3. Set dynamic page title & include the pure CSS modular header
+// 3. Start session and generate CSRF token
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// 4. Get the current user's saved recipes
+$savedRecipeIds = [];
+
+if (isset($_SESSION['user_id'])) {
+    $savedStmt = $pdo->prepare(
+        'SELECT recipe_id FROM saved_recipes WHERE user_id = ?'
+    );
+
+    $savedStmt->execute([$_SESSION['user_id']]);
+
+    $savedRecipeIds = array_map(
+        'intval',
+        $savedStmt->fetchAll(PDO::FETCH_COLUMN)
+    );
+}
+
+// 5. Set page title and include header
 $page_title = "RecipeApp · Recipes";
 include __DIR__ . '/includes/header.php';
 ?>
@@ -128,6 +153,25 @@ include __DIR__ . '/includes/header.php';
                             </a>
                         </div>
                     </div>
+                    <form action="backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="recipe_id"
+                            value="<?= (int) $recipe['recipe_id']; ?>"
+                        >
+
+                        <button type="submit" class="favourite-button">
+                            <?= in_array((int) $recipe['recipe_id'], $savedRecipeIds, true)
+                                ? 'Remove favourite'
+                                : 'Save to favourites'; ?>
+                        </button>
+                    </form>
                 </article>
             <?php endforeach; ?>
         <?php else: ?>
@@ -140,3 +184,5 @@ include __DIR__ . '/includes/header.php';
 // Include pure CSS footer
 include __DIR__ . '/includes/footer.php'; 
 ?>
+
+
