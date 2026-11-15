@@ -1,5 +1,9 @@
 
 <?php
+$page_title = "Browse Recipes · RecipeApp";
+$base_path = '../../'; // Root directory
+include __DIR__ . '/../../includes/header.php';
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
@@ -125,11 +129,6 @@ function escapeRecipe($value) {
         'UTF-8'
     );
 }
-?>
-
-<?php
-$page_title = "Browse Recipes · RecipeApp";
-include __DIR__ . '/../../includes/header.php';
 ?>
 
 <main class="recipe-page">
@@ -301,3 +300,5 @@ include __DIR__ . '/../../includes/header.php';
 
 </body>
 </html>
+
+<?php include __DIR__ . '/../../includes/footer.php'; ?>
