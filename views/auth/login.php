@@ -1,5 +1,8 @@
 <?php
 $error = $_GET['error'] ?? '';
+$base_path = '../../'; // Root directory
+$page_title = "Sign In · RecipeApp";
+include __DIR__ . '/../../includes/header.php'; // Include header.php
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +18,6 @@ $error = $_GET['error'] ?? '';
 <body class="auth-page auth-login">
     <main class="auth-layout">
         <div class="auth-intro">
-            <a class="auth-brand" href="../../index.php" aria-label="Recipe App home">Recipe<span>App</span></a>
             <p class="auth-eyebrow">Good food starts here</p>
             <h1>Welcome back.</h1>
             <p>Log in to return to your favourite recipes and find something delicious to make next.</p>
