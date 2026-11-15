@@ -20,7 +20,8 @@ body.auth-page {
 
 .auth-layout {
     width: min(100%, 1280px);
-    min-height: min(760px, calc(100vh - 8rem));
+    margin: 2.5rem auto 2rem auto;
+    min-height: min(760px, calc(100vh - 10rem));
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
     overflow: hidden;
@@ -56,22 +57,6 @@ body.auth-page {
 .auth-intro>* {
     position: relative;
     z-index: 1;
-}
-
-.auth-brand {
-    align-self: flex-start;
-    padding: .45rem .7rem;
-    border-radius: .2rem;
-    background: rgba(250, 249, 245, .92);
-    color: #292e29;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: -.04em;
-    text-decoration: none;
-}
-
-.auth-brand span {
-    color: #657660;
 }
 
 .auth-eyebrow {
@@ -316,8 +301,10 @@ body.auth-page {
     }
 
     .auth-layout {
-        min-height: auto;
+        margin: 0 auto 1.5rem auto;
+        width: calc(100% - 1.5rem);
         grid-template-columns: 1fr;
+        margin-top: 5.5rem;
     }
 
     .auth-intro {
