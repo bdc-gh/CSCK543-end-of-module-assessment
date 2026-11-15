@@ -10,7 +10,7 @@ require_once __DIR__ . '/../../config/database.php';
 
 // Only logged-in users can save favourites
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /views/auth/login.php');
+    header('Location: ../../views/auth/login.php');
     exit;
 }
 
