@@ -17,6 +17,12 @@ require_once __DIR__ . '/../config/database.php';
 
 $isLogin = isset($_SESSION['user_id']);
 $name = '';
+$currentPath = $_SERVER['SCRIPT_NAME'] ?? '';
+$onRecipePage = strpos($currentPath, '/views/recipes/') !== false;
+$onHomePage = ($header_context ?? '') !== 'account'
+    && !$onRecipePage
+    && strpos($currentPath, '/views/') === false
+    && substr($currentPath, -10) === '/index.php';
 
 if ($isLogin) {
     $stmt = $pdo->prepare('SELECT name FROM users WHERE user_id = ?');
@@ -58,32 +64,32 @@ if ($isLogin) {
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="<?= $base_path; ?>index.php">Home</a></li>
-                    <li><a href="<?= $base_path; ?>views/recipes/index.php">Recipe Archive</a></li>
+                    <li><a href="<?= $base_path; ?>index.php"<?= $onHomePage ? ' aria-current="page"' : '' ?>>Home</a></li>
+                    <li><a href="<?= $base_path; ?>views/recipes/index.php"<?= $onRecipePage ? ' aria-current="page"' : '' ?>>Recipe Archive</a></li>
                 </ul>
             </nav>
             <div class="auth-actions">
-                            <?php if ($isLogin): ?>
-                                <details class="account-menu">
-                                    <summary class="account-menu-trigger">
-                                        <span class="account-menu-avatar material-symbols-outlined" aria-hidden="true">person</span>
-                                        <span class="account-menu-name"><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></span>
-                                        <span class="account-menu-chevron" aria-hidden="true"></span>
-                                    </summary>
-                                    <div class="account-menu-panel">
-                                        <?php if (($header_context ?? '') !== 'account'): ?>
-                                            <a class="account-menu-link" href="<?= $base_path; ?>views/account/index.php">My account</a>
-                                        <?php endif; ?>
-                                        <a class="account-menu-link" href="<?= $base_path; ?>views/recipes/favourites.php">My Favourites</a>
-                                        <form action="<?= $base_path; ?>backend/auth/loginout.php" method="post">
-                                            <button type="submit" class="account-menu-logout">Log out</button>
-                                        </form>
-                                    </div>
-                                </details>
-                            <?php else: ?>
-                                <a class="btn-signin" href="<?= $base_path; ?>views/auth/login.php">Sign In</a>
-                                <a class="btn-register" href="<?= $base_path; ?>views/auth/register.php">Register</a>
+                <?php if ($isLogin): ?>
+                    <details class="account-menu">
+                        <summary class="account-menu-trigger">
+                            <span class="account-menu-avatar material-symbols-outlined" aria-hidden="true">person</span>
+                            <span class="account-menu-name"><?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></span>
+                            <span class="account-menu-chevron" aria-hidden="true"></span>
+                        </summary>
+                        <div class="account-menu-panel">
+                            <?php if (($header_context ?? '') !== 'account'): ?>
+                                <a class="account-menu-link" href="<?= $base_path; ?>views/account/index.php">My account</a>
                             <?php endif; ?>
+                            <a class="account-menu-link" href="<?= $base_path; ?>views/recipes/favourites.php">My Favourites</a>
+                            <form action="<?= $base_path; ?>backend/auth/loginout.php" method="post">
+                                <button type="submit" class="account-menu-logout">Log out</button>
+                            </form>
                         </div>
-                    </div>
-                </header>
+                    </details>
+                <?php else: ?>
+                    <a class="btn-signin" href="<?= $base_path; ?>views/auth/login.php">Sign In</a>
+                    <a class="btn-register" href="<?= $base_path; ?>views/auth/register.php">Register</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </header>
