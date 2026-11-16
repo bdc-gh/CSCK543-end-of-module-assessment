@@ -4,6 +4,9 @@ session_start();
 $old = $_SESSION['register_old'] ?? [];
 unset($_SESSION['register_old']);
 $error = $_GET['error'] ?? '';
+$base_path = '../../'; // Root directory
+$page_title = "Register · RecipeApp";
+include __DIR__ . '/../../includes/header.php'; // Include header.php
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +22,6 @@ $error = $_GET['error'] ?? '';
 <body class="auth-page auth-register">
     <main class="auth-layout">
         <div class="auth-intro">
-            <a class="auth-brand" href="../../index.php" aria-label="Recipe App home">Recipe<span>App</span></a>
             <p class="auth-eyebrow">Good food starts here</p>
             <h1>Make room for flavour.</h1>
             <p>Create an account and start building your own collection of recipes worth sharing.</p>

@@ -79,6 +79,10 @@ body {
     margin-top: 4px;
 }
 
+.content-block + .content-block {
+    margin-top: 2rem;
+}
+
 .nav-links {
     display: flex;
     gap: 2.5rem;
@@ -215,6 +219,7 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     transition: box-shadow 0.2s ease;
 }
+
 /* Make the entire recipe card clickable */
 .recipe-card-link {
     display: block;
@@ -867,11 +872,7 @@ input:focus-visible {
         padding: 0.4rem 0.5rem;
         letter-spacing: 0.04em;
     }
-}
-/* Adjust the spaghetti image position */
-.recipe-card-image[src*="spaghetti_bolognese.jpg"] {
-    object-position: 20% center;
-}
+
 /* Homepage mobile alignment */
 @media (max-width: 600px) {
     .kitchen-ribbon {
@@ -958,4 +959,60 @@ input:focus-visible {
 .recipe-page > div:first-child p {
     max-width: 100%;
 }
+}
+/* ==========================================
+   Recipe Ratings & Comments Styles
+   ========================================== */
+
+.ratings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.rating-item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--surface-low, #f0ede6);
+    width: 100%;
+}
+
+.rating-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.35rem;
+}
+
+.rating-username {
+    font-weight: 600;
+    color: var(--text-main, #292e29);
+}
+
+.rating-score {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.rating-comment {
+    margin: 0;
+    color: var(--secondary);
+    line-height: 1.5;
+    font-size: 0.9375rem;
+    width: 100%;
+}
+
+.no-ratings-notice {
+    color: var(--secondary);
+    margin: 0;
+    font-style: italic;
 }

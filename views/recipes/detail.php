@@ -99,6 +99,8 @@ include __DIR__ . '/../../includes/header.php';
                         <?= htmlspecialchars($recipe['steps'] ?? 'Preparation steps not provided for this entry.', ENT_QUOTES, 'UTF-8'); ?>
                     </div>
                 </div>
+                <!-- Include Ratings Component  -->
+                <?php include __DIR__ . '/components/_ratings.php'; ?>
             </article>
         <?php endif; ?>
 
