@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Account details are available only to signed-in users.
 if (!isset($_SESSION['user_id'])) {
     header('location:../auth/login.php');
     exit;
@@ -14,6 +15,7 @@ $page_title = 'My account | RecipeApp';
 $page_stylesheet = 'assets/css/account.css';
 $body_class = 'account-page';
 $header_context = 'account';
+// The shared header reads these page settings and renders the opening HTML.
 require __DIR__ . '/../../includes/header.php';
 ?>
 

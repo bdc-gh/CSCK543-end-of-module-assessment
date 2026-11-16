@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+/* Account-only layout and panels; shared navigation is styled in recipes.css. */
 body.account-page {
     margin: 0;
     min-height: 100vh;

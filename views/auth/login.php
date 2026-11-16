@@ -4,6 +4,7 @@ $base_path = '../../'; // Root directory
 $page_title = "Sign In · RecipeApp";
 $page_stylesheet = "assets/css/auth.css";
 $body_class = "auth-page auth-login";
+// The shared header renders the page head and navigation.
 include __DIR__ . '/../../includes/header.php';
 ?>
 

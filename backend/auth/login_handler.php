@@ -2,6 +2,7 @@
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
+// Keep the response the same for empty and incorrect credentials.
 if ($email == '' || $password == '') {
     header('Location:../../views/auth/login.php?error=invalid_credentials');
     exit;
@@ -10,6 +11,7 @@ require __DIR__ . '/../../config/database.php';
 
 session_start();
 
+// Look up the stored password hash for the submitted email.
 $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
 $stmt->execute([$email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);

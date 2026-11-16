@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+/* Authentication pages share this layout without changing recipe page styles. */
 body.auth-page {
     min-height: 100vh;
     margin: 0;
