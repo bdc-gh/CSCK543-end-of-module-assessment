@@ -2,20 +2,12 @@
 $error = $_GET['error'] ?? '';
 $base_path = '../../'; // Root directory
 $page_title = "Sign In · RecipeApp";
-include __DIR__ . '/../../includes/header.php'; // Include header.php
+$page_stylesheet = "assets/css/auth.css";
+$body_class = "auth-page auth-login";
+include __DIR__ . '/../../includes/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in | Recipe App</title>
-    <link rel="stylesheet" href="../../assets/css/auth.css">
-</head>
-
-<body class="auth-page auth-login">
     <main class="auth-layout">
         <div class="auth-intro">
             <p class="auth-eyebrow">Good food starts here</p>

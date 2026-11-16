@@ -178,12 +178,12 @@ INSERT INTO ratings (recipe_id, user_id, rating_score, comment) VALUES
 (1, 2, 5, 'Absolutely delicious! Followed the instructions to the letter and it turned out brilliant.'),
 (1, 2, 4, 'Really tasty and straightforward to make. Added a pinch more seasoning to suit our taste.'),
 (2, 2, 5, 'A new midweek favourite in our house—quick, filling, and full of flavour.'),
-(2, 3, 3, 'Decent enough for a quick tea, though it took a bit longer to prep than stated.'),
+(2, 1, 3, 'Decent enough for a quick tea, though it took a bit longer to prep than stated.'),
 (3, 2, 2, 'Found the texture a bit too dry following the exact timings. Might try reducing the oven time next go.'),
 (4, 2, 4, 'Lovely fresh flavours and great leftovers for lunch the next day.'),
-(5, 3, 1, 'Didn''t work out at all for me—the ratios felt quite off and the sauce split.'),
-(6, 2, 5, 'Vibrant, fresh, and packed with flavour. The Vibrant Couscous Salad is an instant winner!');
+(5, 1, 1, 'Didn''t work out at all for me—the ratios felt quite off and the sauce split.'),
+(6, 2, 5, 'Vibrant, fresh, and packed with flavour. The Vibrant Couscous Salad is an instant winner!'),
 (7, 2, 5, 'Spot on! Rich, comforting, and really easy to follow—will definitely be making this again.'),
-(8, 3, 4, 'Properly delicious and went down a treat with the whole family. Just needed an extra five minutes in the oven.');
+(8, 1, 4, 'Properly delicious and went down a treat with the whole family. Just needed an extra five minutes in the oven.');
 
 select * from recipes;

@@ -2,7 +2,7 @@
 <?php
 $page_title = "Browse Recipes · RecipeApp";
 $base_path = '../../'; // Root directory
-include __DIR__ . '/../../includes/header.php';
+
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
@@ -130,7 +130,7 @@ function escapeRecipe($value) {
     );
 }
 ?>
-
+<?php include __DIR__ . '/../../includes/header.php'; ?>
 <main class="recipe-page">
 
    <div class="archive-intro">
@@ -297,8 +297,5 @@ function escapeRecipe($value) {
     </section>
 
 </main>
-
-</body>
-</html>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>
