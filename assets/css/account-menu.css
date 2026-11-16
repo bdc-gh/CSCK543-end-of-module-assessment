@@ -1,0 +1,124 @@
+/* Header account menu */
+.account-menu {
+    position: relative;
+    font-size: 0.875rem;
+}
+
+.account-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 42px;
+    padding: 0.25rem 0.7rem 0.25rem 0.3rem;
+    border: 1px solid #d8dbcf;
+    border-radius: 999px;
+    background: #fff;
+    color: #293426;
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.account-menu-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.account-menu-trigger:hover,
+.account-menu[open] .account-menu-trigger {
+    border-color: #789669;
+    box-shadow: 0 3px 12px rgba(37, 62, 30, 0.1);
+}
+
+.account-menu-trigger:focus-visible,
+.account-menu-panel a:focus-visible,
+.account-menu-panel button:focus-visible {
+    outline: 3px solid #e4ab45;
+    outline-offset: 2px;
+}
+
+.account-menu-avatar {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e4edda;
+    color: #45643b;
+    font-size: 20px;
+}
+
+.account-menu-name {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.account-menu-chevron {
+    width: 7px;
+    height: 7px;
+    margin: -3px 2px 0 2px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.account-menu[open] .account-menu-chevron {
+    transform: rotate(225deg);
+    margin-top: 3px;
+}
+
+.account-menu-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 1100;
+    width: 190px;
+    padding: 0.4rem;
+    border: 1px solid #e3e5db;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 14px 35px rgba(23, 37, 20, 0.15);
+}
+
+.account-menu-panel a,
+.account-menu-panel button {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #293426;
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.account-menu-panel a:hover,
+.account-menu-panel button:hover {
+    background: #f0f4e9;
+}
+
+.account-menu-panel form {
+    margin: 0;
+    border-top: 1px solid #eceee7;
+    padding-top: 0.25rem;
+}
+
+.account-menu-panel button {
+    color: #9b463a;
+}
+
+@media (max-width: 560px) {
+    .account-menu-name {
+        max-width: 75px;
+    }
+
+    .account-menu-panel {
+        width: 170px;
+    }
+}
