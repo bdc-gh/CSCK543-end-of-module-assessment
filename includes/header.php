@@ -28,7 +28,13 @@ if ($isLogin) {
     $stmt = $pdo->prepare('SELECT name FROM users WHERE user_id = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $headerUser = $stmt->fetch(PDO::FETCH_ASSOC);
-    $name = $headerUser['name'] ?? '';
+    if ($headerUser) {
+        $name = $headerUser['name'];
+    } else {
+        // Do not keep showing a signed-in menu for a deleted account.
+        unset($_SESSION['user_id']);
+        $isLogin = false;
+    }
 }
 
 ?>

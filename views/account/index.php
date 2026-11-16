@@ -11,6 +11,12 @@ require __DIR__ . '/../../config/database.php';
 $stmt = $pdo->prepare('SELECT * FROM users WHERE user_id = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$user) {
+    // The account may have been deleted while this browser still has a session.
+    unset($_SESSION['user_id']);
+    header('Location: ../auth/login.php');
+    exit;
+}
 $page_title = 'My account | RecipeApp';
 $page_stylesheet = 'assets/css/account.css';
 $body_class = 'account-page';
