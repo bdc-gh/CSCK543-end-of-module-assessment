@@ -1,11 +1,10 @@
-
 <?php
 // Start the session
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-    if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 // Connect to the database
@@ -13,7 +12,7 @@ require_once __DIR__ . '/../../config/database.php';
 
 // Require the user to be logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /views/auth/login.php');
+    header('Location: ../../views/auth/login.php');
     exit;
 }
 
@@ -37,7 +36,7 @@ include __DIR__ . '/../../includes/header.php';
 
 <main class="recipe-page">
     <div class="recipe-container">
-        
+
         <h1>My Favourites</h1>
         <p>Your collection of saved recipes.</p>
 
@@ -52,14 +51,13 @@ include __DIR__ . '/../../includes/header.php';
 
                 <?php foreach ($recipes as $recipe): ?>
 
-                    <div class="recipe-card favourite-recipe-card">
+                    <div class="recipe-card favourite-recipe-card" id="recipe-<?= (int) $recipe['recipe_id']; ?>">
 
                         <?php if (!empty($recipe['image_filename'])): ?>
                             <img
                                 src="../../assets/images/recipes/<?= htmlspecialchars($recipe['image_filename'], ENT_QUOTES, 'UTF-8'); ?>"
                                 alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>"
-                                class="recipe-card-image"
-                            >
+                                class="recipe-card-image">
                         <?php endif; ?>
 
                         <h2>
@@ -87,15 +85,14 @@ include __DIR__ . '/../../includes/header.php';
 
                         <form action="../../backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
                             <input
-    type="hidden"
-    name="csrf_token"
-    value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>"
->
+                                type="hidden"
+                                name="csrf_token"
+                                value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                             <input
                                 type="hidden"
                                 name="recipe_id"
-                                value="<?= (int) $recipe['recipe_id']; ?>"
-                            >
+                                value="<?= (int) $recipe['recipe_id']; ?>">
+                            <input type="hidden" name="return_to" value="favourites">
 
                             <button type="submit" class="favourite-button">
                                 Remove favourite

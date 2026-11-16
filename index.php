@@ -1,4 +1,5 @@
 <?php
+
 /**
  * RecipeApp Culinary Journal - Home / Landing Page
  * Connects to MySQL via PDO, fetches all recipes, and renders 
@@ -81,15 +82,14 @@ include __DIR__ . '/includes/header.php';
                     id="recipe-search"
                     name="search"
                     value="<?= htmlspecialchars($search_query, ENT_QUOTES, 'UTF-8'); ?>"
-                    style="border: none; background: transparent; width: 100%; outline: none;"
-                />
+                    style="border: none; background: transparent; width: 100%; outline: none;" />
                 <button type="submit" style="background: var(--primary); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;">
                     Search
                 </button>
             </form>
         </div>
         <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); white-space: nowrap;">
-            <span style="color: var(--outline);">Catalogued:</span> 
+            <span style="color: var(--outline);">Catalogued:</span>
             <strong style="color: var(--primary);"><?= count($recipes); ?> Kitchen Recipes</strong>
         </div>
     </div>
@@ -116,14 +116,14 @@ include __DIR__ . '/includes/header.php';
     <div class="recipe-grid">
         <?php if (!empty($recipes)): ?>
             <?php foreach ($recipes as $recipe): ?>
-                <article class="recipe-card">
+                <article class="recipe-card" id="recipe-<?= (int) $recipe['recipe_id']; ?>">
                     <div class="recipe-card-img-placeholder">
-                        <?php 
+                        <?php
                         $image_filename = !empty($recipe['image_filename']) ? $recipe['image_filename'] : 'placeholder.jpg';
                         $image_path = $base_path . 'assets/images/recipes/' . htmlspecialchars($image_filename, ENT_QUOTES, 'UTF-8');
                         ?>
                         <img src="<?= $image_path; ?>" alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;" />
-                        
+
                         <div style="position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(250,249,245,0.9); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; z-index: 2;">
                             <?= htmlspecialchars($recipe['category'], ENT_QUOTES, 'UTF-8'); ?>
                         </div>
@@ -153,25 +153,32 @@ include __DIR__ . '/includes/header.php';
                             </a>
                         </div>
                     </div>
-                    <form action="backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
-                        <input
-                            type="hidden"
-                            name="csrf_token"
-                            value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>"
-                        >
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <form action="backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
 
-                        <input
-                            type="hidden"
-                            name="recipe_id"
-                            value="<?= (int) $recipe['recipe_id']; ?>"
-                        >
+                            <input
+                                type="hidden"
+                                name="recipe_id"
+                                value="<?= (int) $recipe['recipe_id']; ?>">
 
-                        <button type="submit" class="favourite-button">
-                            <?= in_array((int) $recipe['recipe_id'], $savedRecipeIds, true)
-                                ? 'Remove favourite'
-                                : 'Save to favourites'; ?>
-                        </button>
-                    </form>
+                            <input type="hidden" name="return_to" value="home">
+
+                            <button type="submit" class="favourite-button">
+                                <?= in_array((int) $recipe['recipe_id'], $savedRecipeIds, true)
+                                    ? 'Remove favourite'
+                                    : 'Save to favourites'; ?>
+                            </button>
+                        </form>
+
+                    <?php else: ?>
+                        <div class="favourite-form">
+                            <a class="favourite-button" href="./views/auth/login.php">Log in to save</a>
+                        </div>
+                    <?php endif; ?>
                 </article>
             <?php endforeach; ?>
         <?php else: ?>
@@ -180,9 +187,7 @@ include __DIR__ . '/includes/header.php';
     </div>
 </main>
 
-<?php 
+<?php
 // Include pure CSS footer
-include __DIR__ . '/includes/footer.php'; 
+include __DIR__ . '/includes/footer.php';
 ?>
-
-

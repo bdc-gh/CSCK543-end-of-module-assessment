@@ -1,4 +1,3 @@
-
 <?php
 // Start the session if it is not already active
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -66,7 +65,17 @@ if ($stmt->fetchColumn()) {
     );
     $stmt->execute([$_SESSION['user_id'], $recipeId]);
 }
+$destinations = [
+    'home' => '../../index.php',
+    'archive' => '../../views/recipes/index.php',
+    'favourites' => '../../views/recipes/favourites.php',
+];
 
-// Return to the recipe archive
-header('Location: /views/recipes/index.php');
+$returnTo = $_POST['return_to'] ?? 'archive';
+$destination = $destinations[$returnTo] ?? $destinations['archive'];
+if ($returnTo !== 'favourites') {
+    $destination .= '#recipe-' . $recipeId;
+}
+
+header('Location: ' . $destination);
 exit;

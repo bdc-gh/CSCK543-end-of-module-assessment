@@ -1,4 +1,3 @@
-
 <?php
 $page_title = "Browse Recipes · RecipeApp";
 $base_path = '../../'; // Root directory
@@ -112,17 +111,17 @@ $sql .= " ORDER BY " . $sortOptions[$sort];
 
 try {
     // Retrieve recipes from the database
-      $stmt = $pdo->prepare($sql);
-$stmt->execute($params);
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
 
-$recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $recipes = [];
     $databaseError = true;
 }
 
-function escapeRecipe($value) {
+function escapeRecipe($value)
+{
     return htmlspecialchars(
         (string) $value,
         ENT_QUOTES,
@@ -133,65 +132,65 @@ function escapeRecipe($value) {
 <?php include __DIR__ . '/../../includes/header.php'; ?>
 <main class="recipe-page">
 
-   <div class="archive-intro">
-    <h1>Discover Recipes</h1>
-    <p>Explore delicious recipes and find your next favourite meal.</p>
-</div>
+    <div class="archive-intro">
+        <h1>Discover Recipes</h1>
+        <p>Explore delicious recipes and find your next favourite meal.</p>
+    </div>
     <section aria-labelledby="recipe-heading">
 
         <h2 id="recipe-heading">All Recipes</h2>
         <form method="GET" action="index.php" class="recipe-filter-form">
-           <div class="filter-field">
-    <label for="sort">Sort recipes</label>
-    <select name="sort" id="sort">
-        <option value="newest" <?= $sort === 'newest' ? 'selected' : ''; ?>>Newest first</option>
-        <option value="highest_rated" <?= $sort === 'highest_rated' ? 'selected' : ''; ?>>Highest rated</option>
-        <option value="quickest" <?= $sort === 'quickest' ? 'selected' : ''; ?>>Quickest first</option>
-        <option value="alphabetical" <?= $sort === 'alphabetical' ? 'selected' : ''; ?>>Alphabetical (A–Z)</option>
-    </select>
-</div>
+            <div class="filter-field">
+                <label for="sort">Sort recipes</label>
+                <select name="sort" id="sort">
+                    <option value="newest" <?= $sort === 'newest' ? 'selected' : ''; ?>>Newest first</option>
+                    <option value="highest_rated" <?= $sort === 'highest_rated' ? 'selected' : ''; ?>>Highest rated</option>
+                    <option value="quickest" <?= $sort === 'quickest' ? 'selected' : ''; ?>>Quickest first</option>
+                    <option value="alphabetical" <?= $sort === 'alphabetical' ? 'selected' : ''; ?>>Alphabetical (A–Z)</option>
+                </select>
+            </div>
 
-<div class="filter-field">
-    <label for="min_rating">Minimum rating</label>
-    <select name="min_rating" id="min_rating">
-        <option value="">Any rating</option>
-        <option value="3" <?= $minRating == 3 ? 'selected' : ''; ?>>3 stars or above</option>
-        <option value="4" <?= $minRating == 4 ? 'selected' : ''; ?>>4 stars or above</option>
-        <option value="5" <?= $minRating == 5 ? 'selected' : ''; ?>>5 stars only</option>
-    </select>
-</div>
+            <div class="filter-field">
+                <label for="min_rating">Minimum rating</label>
+                <select name="min_rating" id="min_rating">
+                    <option value="">Any rating</option>
+                    <option value="3" <?= $minRating == 3 ? 'selected' : ''; ?>>3 stars or above</option>
+                    <option value="4" <?= $minRating == 4 ? 'selected' : ''; ?>>4 stars or above</option>
+                    <option value="5" <?= $minRating == 5 ? 'selected' : ''; ?>>5 stars only</option>
+                </select>
+            </div>
 
-<div class="filter-field">
-    <label for="max_time">Maximum cooking time</label>
-    <select name="max_time" id="max_time">
-        <option value="">Any time</option>
-        <option value="15" <?= $maxTime == 15 ? 'selected' : ''; ?>>15 minutes</option>
-        <option value="30" <?= $maxTime == 30 ? 'selected' : ''; ?>>30 minutes</option>
-        <option value="45" <?= $maxTime == 45 ? 'selected' : ''; ?>>45 minutes</option>
-        <option value="60" <?= $maxTime == 60 ? 'selected' : ''; ?>>60 minutes</option>
-    </select>
-</div>
+            <div class="filter-field">
+                <label for="max_time">Maximum cooking time</label>
+                <select name="max_time" id="max_time">
+                    <option value="">Any time</option>
+                    <option value="15" <?= $maxTime == 15 ? 'selected' : ''; ?>>15 minutes</option>
+                    <option value="30" <?= $maxTime == 30 ? 'selected' : ''; ?>>30 minutes</option>
+                    <option value="45" <?= $maxTime == 45 ? 'selected' : ''; ?>>45 minutes</option>
+                    <option value="60" <?= $maxTime == 60 ? 'selected' : ''; ?>>60 minutes</option>
+                </select>
+            </div>
 
-<div class="filter-field">
-    <label for="dietary">Dietary preference</label>
-    <select name="dietary" id="dietary">
-        <option value="">All recipes</option>
-        <option value="vegan" <?= $dietary === 'vegan' ? 'selected' : ''; ?>>Vegan</option>
-        <option value="vegetarian" <?= $dietary === 'vegetarian' ? 'selected' : ''; ?>>Vegetarian</option>
-        <option value="meat" <?= $dietary === 'meat' ? 'selected' : ''; ?>>Meat</option>
-    </select>
-</div>
+            <div class="filter-field">
+                <label for="dietary">Dietary preference</label>
+                <select name="dietary" id="dietary">
+                    <option value="">All recipes</option>
+                    <option value="vegan" <?= $dietary === 'vegan' ? 'selected' : ''; ?>>Vegan</option>
+                    <option value="vegetarian" <?= $dietary === 'vegetarian' ? 'selected' : ''; ?>>Vegetarian</option>
+                    <option value="meat" <?= $dietary === 'meat' ? 'selected' : ''; ?>>Meat</option>
+                </select>
+            </div>
 
-<?php if ($search !== ''): ?>
-    <input type="hidden" name="search" value="<?= escapeRecipe($search); ?>">
-<?php endif; ?>
-
-
+            <?php if ($search !== ''): ?>
+                <input type="hidden" name="search" value="<?= escapeRecipe($search); ?>">
+            <?php endif; ?>
 
 
-    <button type="submit">Apply filter</button>
 
-</form>
+
+            <button type="submit">Apply filter</button>
+
+        </form>
 
         <?php if (!empty($databaseError)): ?>
 
@@ -208,85 +207,89 @@ function escapeRecipe($value) {
             <div class="recipe-grid">
 
                 <?php foreach ($recipes as $recipe): ?>
-<div class="recipe-card-item">
-                   
-<a class="recipe-card-link" href="detail.php?id=<?= (int) $recipe['recipe_id']; ?>">
-    <article class="recipe-card">
-    <?php if (!empty($recipe['image_filename'])): ?>
-    <img
-        src="../../assets/images/recipes/<?= htmlspecialchars($recipe['image_filename'], ENT_QUOTES, 'UTF-8'); ?>"
-        alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>"
-        class="recipe-card-image"
-    >
-<?php endif; ?>
+                    <div class="recipe-card-item" id="recipe-<?= (int) $recipe['recipe_id']; ?>">
 
-        <h3>
-            <?= escapeRecipe($recipe['title']); ?>
-        </h3>
-        <?php if ($recipe['average_rating'] !== null): ?>
-    <p>
-        <strong>Rating:</strong>
-        <?= number_format((float) $recipe['average_rating'], 1); ?> / 5
-    </p>
-<?php else: ?>
-    <p><strong>Rating:</strong> Not rated yet</p>
-<?php endif; ?>
+                        <a class="recipe-card-link" href="detail.php?id=<?= (int) $recipe['recipe_id']; ?>">
+                            <article class="recipe-card">
+                                <?php if (!empty($recipe['image_filename'])): ?>
+                                    <img
+                                        src="../../assets/images/recipes/<?= htmlspecialchars($recipe['image_filename'], ENT_QUOTES, 'UTF-8'); ?>"
+                                        alt="<?= htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8'); ?>"
+                                        class="recipe-card-image">
+                                <?php endif; ?>
 
-        <p>
-            <?= escapeRecipe($recipe['description']); ?>
-        </p>
+                                <h3>
+                                    <?= escapeRecipe($recipe['title']); ?>
+                                </h3>
+                                <?php if ($recipe['average_rating'] !== null): ?>
+                                    <p>
+                                        <strong>Rating:</strong>
+                                        <?= number_format((float) $recipe['average_rating'], 1); ?> / 5
+                                    </p>
+                                <?php else: ?>
+                                    <p><strong>Rating:</strong> Not rated yet</p>
+                                <?php endif; ?>
 
-        <p>
-            <strong>Category:</strong>
-            <?= escapeRecipe($recipe['category']); ?>
-        </p>
+                                <p>
+                                    <?= escapeRecipe($recipe['description']); ?>
+                                </p>
 
-        <p>
-            <strong>Preparation:</strong>
-            <?= escapeRecipe($recipe['prep_time_mins']); ?>
-            minutes
-        </p>
+                                <p>
+                                    <strong>Category:</strong>
+                                    <?= escapeRecipe($recipe['category']); ?>
+                                </p>
 
-        <p>
-            <strong>Cooking:</strong>
-            <?= escapeRecipe($recipe['cook_time_mins']); ?>
-            minutes
-        </p>
+                                <p>
+                                    <strong>Preparation:</strong>
+                                    <?= escapeRecipe($recipe['prep_time_mins']); ?>
+                                    minutes
+                                </p>
 
-        <p>
-            <strong>Total time:</strong>
-            <?= (int) $recipe['prep_time_mins']
-                + (int) $recipe['cook_time_mins']; ?>
-            minutes
-        </p>
+                                <p>
+                                    <strong>Cooking:</strong>
+                                    <?= escapeRecipe($recipe['cook_time_mins']); ?>
+                                    minutes
+                                </p>
 
-        <p>
-            <strong>Servings:</strong>
-            <?= escapeRecipe($recipe['servings']); ?>
-        </p>
+                                <p>
+                                    <strong>Total time:</strong>
+                                    <?= (int) $recipe['prep_time_mins']
+                                        + (int) $recipe['cook_time_mins']; ?>
+                                    minutes
+                                </p>
 
-      </article>
-</a>
+                                <p>
+                                    <strong>Servings:</strong>
+                                    <?= escapeRecipe($recipe['servings']); ?>
+                                </p>
 
-<form action="../../backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
-    <input
-    type="hidden"
-    name="csrf_token"
-    value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>"
->
-    <input
-        type="hidden"
-        name="recipe_id"
-        value="<?= (int) $recipe['recipe_id']; ?>"
-    >
+                            </article>
+                        </a>
+                        <?php if (isset($_SESSION['user_id'])): ?>
 
-    <button type="submit" class="favourite-button">
-        <?= in_array((int) $recipe['recipe_id'], $savedRecipeIds, true)
-            ? 'Remove favourite'
-            : 'Save to favourites'; ?>
-    </button>
-</form>
-</div>
+                            <form action="../../backend/favourites/favourites_handler.php" method="POST" class="favourite-form">
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <input
+                                    type="hidden"
+                                    name="recipe_id"
+                                    value="<?= (int) $recipe['recipe_id']; ?>">
+                                <input type="hidden" name="return_to" value="archive">
+
+                                <button type="submit" class="favourite-button">
+                                    <?= in_array((int) $recipe['recipe_id'], $savedRecipeIds, true)
+                                        ? 'Remove favourite'
+                                        : 'Save to favourites'; ?>
+                                </button>
+                            </form>
+                        <?php else: ?>
+                            <div class="favourite-form">
+                                <a class="favourite-button" href="../auth/login.php">Log in to save</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
                 <?php endforeach; ?>
 

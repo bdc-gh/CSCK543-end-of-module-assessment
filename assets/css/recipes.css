@@ -427,6 +427,11 @@ input:focus-visible {
 }
 
 .favourite-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 40px;
     background-color: #A5A99A;
     color: #30332F;
     border: none;
@@ -435,6 +440,9 @@ input:focus-visible {
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -442,6 +450,8 @@ input:focus-visible {
 .favourite-button:hover {
     background-color: #B99587;
 }
+
+a.favourite-button:visited { color: #30332F; }
 
 .favourite-button:focus-visible {
     outline: 3px solid #30332F;
