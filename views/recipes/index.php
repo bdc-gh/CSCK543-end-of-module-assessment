@@ -130,7 +130,7 @@ function escapeRecipe($value)
 }
 ?>
 <?php include __DIR__ . '/../../includes/header.php'; ?>
-<main class="recipe-page">
+<main class="recipe-page archive-page">
 
     <div class="archive-intro">
         <h1>Discover Recipes</h1>

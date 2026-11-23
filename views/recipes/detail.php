@@ -30,7 +30,7 @@ $page_title = $recipe ? htmlspecialchars($recipe['title'], ENT_QUOTES, 'UTF-8') 
 include __DIR__ . '/../../includes/header.php';
 ?>
 
-<main class="recipe-page">
+<main class="recipe-page detail-page">
     <div class="recipe-container">
         
         <?php if (!empty($error_notice)): ?>
