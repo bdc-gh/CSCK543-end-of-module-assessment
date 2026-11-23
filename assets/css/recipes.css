@@ -928,6 +928,12 @@ a.favourite-button:visited { color: #30332F; }
     padding-top: 1.5rem;
 }
 
+/* Clear the two-row fixed header on recipe pages. */
+.archive-page,
+.detail-page {
+    padding-top: 132px;
+}
+
 .recipe-page > div:first-child {
     margin-bottom: 1.5rem !important;
     flex-direction: column;
